@@ -1,6 +1,12 @@
 require "formula"
 require File.join(File.dirname(__FILE__), "abstract-php-version")
 
+class String
+  def undent
+    gsub(/^.{#{(slice(/^ +/) || '').length}}/, "")
+  end
+end
+
 class UnsupportedPhpApiError < RuntimeError
   def initialize
     super "Unsupported PHP API Version"
@@ -16,6 +22,9 @@ class InvalidPhpizeError < RuntimeError
 end
 
 class AbstractPhpExtension < Formula
+
+  PHP_REGEX = /^[P,p][H,h][P,p][@]*([5,7])\.([0-9]+)/
+
   def initialize(*)
     super
 
@@ -46,7 +55,10 @@ class AbstractPhpExtension < Formula
 
   def php_branch
     class_name = self.class.name.split("::").last
-    matches = /^Php([5,7])([0-9]+)/.match(class_name)
+    if self.class::PHP_FORMULA
+      class_name = self.class::PHP_FORMULA
+    end
+    matches = PHP_REGEX.match(class_name)
     if matches
       matches[1] + "." + matches[2]
     else
@@ -55,7 +67,7 @@ class AbstractPhpExtension < Formula
   end
 
   def php_formula
-    "php" + php_branch.sub(".", "")
+    "php@" + php_branch
   end
 
   def safe_phpize
@@ -89,10 +101,9 @@ class AbstractPhpExtension < Formula
   end
 
   def extension
-    class_name = self.class.name.split("::").last
-    matches = /^Php[5,7][0-9](.+)/.match(class_name)
-    if matches
-      matches[1].downcase
+    class_name = self.class.name.split("::").last.split("AT").first
+    if class_name
+      class_name.downcase
     else
       raise "Unable to guess PHP extension name for #{class_name}"
     end
@@ -112,8 +123,8 @@ class AbstractPhpExtension < Formula
       [#{extension}]
       #{extension_type}="#{module_path}"
       EOS
-  rescue StandardError
-    nil
+  rescue StandardError => error
+    raise error
   end
 
   test do
@@ -237,5 +248,14 @@ class AbstractPhp72Extension < AbstractPhpExtension
   def self.init(opts = [])
     super()
     depends_on "php72" => opts if build.with?("homebrew-php")
+  end
+end
+
+class AbstractPhp73Extension < AbstractPhpExtension
+  include AbstractPhpVersion::Php73Defs
+
+  def self.init(opts = [])
+    super()
+    depends_on "php@7.3" => opts if build.with?("homebrew-php")
   end
 end
