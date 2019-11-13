@@ -1,6 +1,6 @@
 # homebrew-phalcon
 
-## Currently expects php 7.3 or higher
+## Currently expects Php 7.3 or higher
 
 $ `brew tap phalcon/extension https://github.com/ninjapanzer/homebrew-phalcon`
 
