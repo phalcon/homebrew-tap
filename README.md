@@ -1,14 +1,17 @@
-# homebrew-phalcon
+# Homebrew Phalcon
 
-## Currently expects Php 7.3 or higher
+## Currently expects PHP 7.3 or higher
 
 $ `brew tap phalcon/extension https://github.com/ninjapanzer/homebrew-phalcon`
 
 ## Phalcon 3.4
+
 $ `brew install phalcon`
 
-## Phalcon 4.0.0rc3
+## Phalcon 4.0.0-RC.3
+
 This will also install php-psr 0.7.0 from https://github.com/jbboehr/php-psr as a dependency
+
 $ `brew install phalcon@4`
 
 ### Use your Own PHP
