@@ -4,7 +4,7 @@
 
 $ `brew tap phalcon/extension https://github.com/ninjapanzer/homebrew-phalcon`
 
-## Phalcon 3.5
+## Phalcon 3.4
 $ `brew install phalcon`
 
 ## Phalcon 4.0.0rc3
