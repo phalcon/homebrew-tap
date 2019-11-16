@@ -55,6 +55,7 @@ class AbstractPhpVersion < Formula
     PHP_GITHUB_URL  = "https://github.com/php/php-src.git".freeze
     PHP_VERSION     = "7.0.27".freeze
     PHP_BRANCH      = "PHP-7.0".freeze
+    PHP_FORMULA     = "php@7.0".freeze
 
     PHP_CHECKSUM    = {
       :sha256 => "99fa2563bb4c4c1cde9febe87cfe97324227d7b4b8828f2e936e507127394131",
@@ -66,6 +67,7 @@ class AbstractPhpVersion < Formula
     PHP_GITHUB_URL  = "https://github.com/php/php-src.git".freeze
     PHP_VERSION     = "7.1.13".freeze
     PHP_BRANCH      = "PHP-7.1".freeze
+    PHP_FORMULA     = "php@7.1".freeze
 
     PHP_CHECKSUM    = {
       :sha256 => "35fda51d2d44600940185fd5818d336a79e77ab3c98e2bd075091f2f91cf98a1",
@@ -77,6 +79,7 @@ class AbstractPhpVersion < Formula
     PHP_GITHUB_URL  = "https://github.com/php/php-src.git".freeze
     PHP_VERSION     = "7.2.0".freeze
     PHP_BRANCH      = "PHP-7.2".freeze
+    PHP_FORMULA     = "php@7.2".freeze
 
     PHP_CHECKSUM    = {
       :sha256 => "2bfefae4226b9b97879c9d33078e50bdb5c17f45ff6e255951062a529720c64a",
