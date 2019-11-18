@@ -2,7 +2,7 @@
 
 ## Currently expects PHP 7.3 or higher
 
-$ `brew tap phalcon/extension https://github.com/ninjapanzer/homebrew-phalcon`
+$ `brew tap phalcon/extension https://github.com/phalcon/homebrew-tap`
 
 ## Phalcon 3.4
 
