@@ -10,7 +10,7 @@ class PhalconAT400 < AbstractPhp74Extension
 
   bottle do
     cellar :any_skip_relocation
-    root_url "https://github.com/phalcon/homebrew-tap/releases/download/v4_rc"
+    root_url "https://github.com/phalcon/homebrew-tap/releases/download/v4.0.x"
     sha256 "7c7eb1ec5fa66a15c168fba4eec1bf7f0f2d05acf0e850b6156f53b0c8974ddb" => :high_sierra
     sha256 "ef46d66685ba718574c1ade55de2e8efac32c5291d6c4bdb8b6d31d42e1cee69" => :sierra
   end
