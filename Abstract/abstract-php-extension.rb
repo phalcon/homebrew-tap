@@ -33,7 +33,17 @@ class AbstractPhpExtension < Formula
       i = IO.popen("#{phpize} -v")
       out = i.readlines.join("")
       i.close
-      { 53 => 20090626, 54 => 20100412, 55 => 20121113, 56 => 20131106, 70 => 20151012, 71 => 20160303, 72 => 20170718 }.each do |v, api|
+      {
+        53 => 20090626,
+        54 => 20100412,
+        55 => 20121113,
+        56 => 20131106,
+        70 => 20151012,
+        71 => 20160303,
+        72 => 20170718,
+        73 => 20180731,
+        74 => 20190902
+      }.each do |v, api|
         installed_php_version = v.to_s if out.match(/#{api}/)
       end
 
@@ -257,5 +267,14 @@ class AbstractPhp73Extension < AbstractPhpExtension
   def self.init(opts = [])
     super()
     depends_on "php@7.3" => opts if build.with?("homebrew-php")
+  end
+end
+
+class AbstractPhp74Extension < AbstractPhpExtension
+  include AbstractPhpVersion::Php74Defs
+
+  def self.init(opts = [])
+    super()
+    depends_on "php@7.4" => opts if build.with?("homebrew-php")
   end
 end

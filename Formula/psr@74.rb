@@ -1,6 +1,6 @@
 require File.expand_path("../../Abstract/abstract-php-extension", __FILE__)
 
-class Psr < AbstractPhp73Extension
+class PsrAT74 < AbstractPhp74Extension
   init
   desc "PHP extension providing the accepted PSR interfaces "
   homepage "https://phalconphp.com/"
@@ -10,6 +10,8 @@ class Psr < AbstractPhp73Extension
 
   bottle do
     cellar :any_skip_relocation
+    root_url "https://github.com/phalcon/homebrew-tap/releases/download/v4.0.x"
+    sha256 "06249d93567e517f25dabf0e92e0b9b2c04562d2ad1c28b734973d76e94508cb" => :sierra
   end
 
   depends_on "pcre"
