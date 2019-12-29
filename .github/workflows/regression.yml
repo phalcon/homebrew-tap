@@ -1,0 +1,48 @@
+name: Regression
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false      
+      matrix:
+        operating-system: [macos-latest]
+        phalcon: [3.4, 4.0.0, 4.0RC2, 4.0rc3, 73_4.0.0]
+    name: Building Phalcon@${{matrix.phalcon}} Test on ${{ matrix.operating-system }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Add Phalcon Tap
+      run: brew tap phalcon/extension .
+    - name: Try to Install Phalcon
+      run: brew install phalcon@${{matrix.phalcon}} --build-from-source
+    - name: force php linking for 7.3
+      if: startsWith( matrix.phalcon, '4.0.' ) != true
+      run: brew link -f --overwrite php@7.3
+    - name: Testing ini values 3.4
+      if: matrix.phalcon == '3.4'
+      run: |
+        php -r "echo 'xdebug: '.extension_loaded('xdebug');"
+        php -r "echo 'phalcon: ' . phpversion('phalcon').\"\n\";"
+        php -r "if(! extension_loaded('phalcon')) {throw new Exception('phalcon not found');}"
+        php -r "if(phpversion('phalcon')!='3.4.5') {throw new Exception('Wrong phalcon version Installed '. phpversion('phalcon'));}"
+    - name: Testing ini values RC
+      if: contains( matrix.phalcon, 'rc' )
+      run: |
+        php -r "echo 'xdebug: '.extension_loaded('xdebug');"
+        php -r "echo 'psr: ' . phpversion('psr').\"\n\";"
+        php -r "echo 'phalcon: ' . phpversion('phalcon').\"\n\";"
+        php -r "if(! extension_loaded('psr')) {throw new Exception('psr not found');}"
+        php -r "if(! extension_loaded('phalcon')) {throw new Exception('phalcon not found');}"
+        php -r "if(! substr(phpversion('phalcon'), 0, strlen('4.0.0')) === '4.0.0') {throw new Exception('Wrong phalcon version Installed '. phpversion('phalcon'));}"
+    - name: Testing ini values HEAD
+      if: contains( matrix.phalcon, '4.0.' )
+      run: |
+        php -r "echo 'xdebug: '.extension_loaded('xdebug');"
+        php -r "echo 'psr: ' . phpversion('psr').\"\n\";"
+        php -r "echo 'phalcon: ' . phpversion('phalcon').\"\n\";"
+        php -r "if(! extension_loaded('psr')) {throw new Exception('psr not found');}"
+        php -r "if(! extension_loaded('phalcon')) {throw new Exception('phalcon not found');}"
+        php -r "if(phpversion('phalcon')!='4.0.0') {throw new Exception('Wrong phalcon version Installed '. phpversion('phalcon'));}"

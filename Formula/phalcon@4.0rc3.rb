@@ -5,7 +5,7 @@ class PhalconAT40rc3 < AbstractPhp73Extension
   desc "Full-stack PHP framework"
   homepage "https://phalconphp.com/"
   url "https://github.com/phalcon/cphalcon/archive/v4.0.0-rc.3.tar.gz"
-  sha256 "9d3fbaac4235110e000b8020543d53342aa7d274926dc44207753bc201121d7b"
+  sha256 "d7bd18aa687530f8df89270e13892fac94d2414524f0104f84b9565bdc58d8f6"
   head "https://github.com/phalcon/cphalcon.git"
 
   bottle do
@@ -13,7 +13,7 @@ class PhalconAT40rc3 < AbstractPhp73Extension
   end
 
   depends_on "pcre"
-  depends_on "psr"
+  depends_on "psr@73"
 
   def install
     Dir.chdir "build/php7/64bits"
