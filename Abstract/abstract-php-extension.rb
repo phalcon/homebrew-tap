@@ -88,7 +88,7 @@ class AbstractPhpExtension < Formula
 
   def phpize
     if build.without? "homebrew-php"
-      "phpize"
+      ENV["HOMEBREW_PHPIZE"] || "phpize"
     else
       "#{Formula[php_formula].opt_bin}/phpize"
     end
@@ -104,7 +104,11 @@ class AbstractPhpExtension < Formula
 
   def phpconfig
     if build.without? "homebrew-php"
-      ""
+      if (ENV["HOMEBREW_PHP_CONFIG"])
+        "--with-php-config=#{ENV["HOMEBREW_PHP_CONFIG"]}"
+      else
+        ""
+      end
     else
       "--with-php-config=#{Formula[php_formula].opt_bin}/php-config"
     end
