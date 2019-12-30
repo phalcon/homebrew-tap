@@ -17,6 +17,7 @@ class PhalconAT34 < AbstractPhp73Extension
   def install
     Dir.chdir "build/php7/64bits"
 
+    raise
     safe_phpize
     system "./configure", "--prefix=#{prefix}", phpconfig, "--enable-phalcon"
     system "make"
