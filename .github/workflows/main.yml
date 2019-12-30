@@ -1,0 +1,24 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Add Phalcon Tap
+      run: brew tap phalcon/extension .
+    - name: Try to Install Phalcon
+      run: brew install phalcon --build-from-source
+    - name: Testing ini values
+      run: |        
+        php -r "echo 'xdebug: '.extension_loaded('xdebug');"
+        php -v            
+        php -r "echo 'psr: ' . phpversion('psr').'\n';"
+        php -r "echo 'phalcon: ' . phpversion('phalcon').'\n';"        
+        php -r "if(! extension_loaded('psr')) {throw new Exception('psr not found');}"
+        php -r "if(! extension_loaded('phalcon')) {throw new Exception('phalcon not found');}"
