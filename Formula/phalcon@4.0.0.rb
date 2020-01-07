@@ -4,8 +4,8 @@ class PhalconAT400 < AbstractPhp74Extension
   init
   desc "Full-stack PHP framework"
   homepage "https://phalconphp.com/"
-  url "https://github.com/phalcon/cphalcon/archive/4.0.x.tar.gz"
-  sha256 "b8c8c5c331fed6c216ed5f799aadd3c06dac66e9b814a48c38ec9df4eb4c642c"
+  url "https://github.com/phalcon/cphalcon/archive/4.0.0_homebrew.tar.gz"
+  sha256 "aacdb5eff46937e803fda72a466e96864b0bf9ce3df286e04b6519aecac37503"
   head "https://github.com/phalcon/cphalcon.git"
 
   bottle do
