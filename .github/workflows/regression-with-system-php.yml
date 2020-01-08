@@ -22,7 +22,7 @@ jobs:
     - name: Force Link Unoffical PHP 7.3
       run: brew link --force --overwrite php@7.3
     - name: Try to Install Phalcon
-      run: brew install phalcon@${{matrix.phalcon}} --build-from-source --without-homebrew-php
+      run: brew install phalcon@${{matrix.phalcon}} --without-homebrew-php
     - name: Testing ini values 3.4
       if: matrix.phalcon == '3.4'
       run: |
