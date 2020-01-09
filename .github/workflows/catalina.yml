@@ -1,0 +1,48 @@
+name: Catalina Bottle
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'Formula/*'
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Install JQ Dep
+      run: brew install jq
+    - name: Add Phalcon Tap
+      run: brew tap phalcon/extension .
+    - name: Try to Install Phalcon
+      run: brew install --build-bottle phalcon
+    - name: Build Bottle
+      run: brew bottle --json phalcon
+    - name: Get Bottle Name
+      id: bottle_name
+      run: echo "::set-output name=filename::$(cat *.bottle.json | jq '.[].bottle.tags[].local_filename'  | tr -d '"')"
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: true
+        prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: ${{ steps.bottle_name.outputs.filename }}
+        asset_name: ${{ steps.bottle_name.outputs.filename }}
+        asset_content_type: application/zip
