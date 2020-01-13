@@ -13,7 +13,7 @@ class PhalconAT402 < AbstractPhp74Extension
     root_url "https://github.com/phalcon/homebrew-tap/releases/download/v4.0.2"
     # sha256 "607eaf8613d7d02dd0529fd641978e2a814cb525d502ab882aded143bcda97e4" => :catalina
     # sha256 "e645dfbf9cb485380f7cd92740dc5dcd30f8b6f4b9051ee3f8ec11f903e9243a" => :mojave
-    # sha256 "2b827bbdd2b52f136af1cfa1e209457f0264c5d9a0804345982e0a57d50aa940" => :high_sierra
+    sha256 "20b862ff1c24b8fa33462f01c61a10e2f08fa67a1a94be69df38af662d893398" => :high_sierra
     sha256 "4df08e30b0147234585ec94639fc01c8d80767dcb77f6c4cfe1df3943d4ee144" => :sierra
   end
 
