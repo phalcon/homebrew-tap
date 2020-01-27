@@ -4,7 +4,7 @@
 
 $ `brew tap phalcon/extension https://github.com/phalcon/homebrew-tap`
 
-## Phalcon 4.0.2
+## Phalcon 4.0.3
 
 This will also install php-psr 0.7.0 from https://github.com/jbboehr/php-psr as a dependency
 
@@ -12,11 +12,13 @@ $ `brew install phalcon`
 
 ### Previous Versions
 
-**4.0.0** -> $ `brew install phalcon@4.0.0
+**4.0.2** -> $ `brew install palcon@4.0.2`
 
-**4.0.0rc2** -> $ `brew install phalcon@4.0rc2
+**4.0.0** -> $ `brew install phalcon@4.0.0`
 
-**4.0.0rc3** -> $ `brew install phalcon@4.0rc3
+**4.0.0rc2** -> $ `brew install phalcon@4.0rc2`
+
+**4.0.0rc3** -> $ `brew install phalcon@4.0rc3`
 
 ## Phalcon 3.4
 
