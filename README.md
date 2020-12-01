@@ -12,6 +12,8 @@ $ `brew install phalcon`
 
 ### Previous Versions
 
+**4.0.6** -> $ `brew install phalcon@4.0.6`
+
 **4.0.5** -> $ `brew install phalcon@4.0.5` Updated PSR 1.0.0
 
 **4.0.4** -> $ `brew install phalcon@4.0.4` Last version using PSR 0.7.0
