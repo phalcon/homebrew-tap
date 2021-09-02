@@ -1,4 +1,4 @@
-require File.expand_path("../../Abstract/abstract-php-extension", __FILE__)
+require File.expand_path("../Abstract/abstract-php-extension", __dir__)
 
 class PsrAT73 < AbstractPhp73Extension
   init
@@ -19,7 +19,7 @@ class PsrAT73 < AbstractPhp73Extension
 
     system "./configure", "--prefix=#{prefix}", phpconfig, "--enable-psr"
     system "make"
-    
+
     prefix.install "modules/psr.so"
     prefix.install "modules/psr.la"
 
