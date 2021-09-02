@@ -9,7 +9,7 @@ class PsrAT73 < AbstractPhp73Extension
   head "https://github.com/jbboehr/php-psr.git"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, catalina: "f85be1d1434368abd16e06b81e394487f81b5e2706220f01c85558ba486ee3e7"
+    sha256 cellar: :any_skip_relocation, sierra: "f85be1d1434368abd16e06b81e394487f81b5e2706220f01c85558ba486ee3e7"
   end
 
   depends_on "pcre"
