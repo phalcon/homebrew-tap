@@ -9,7 +9,7 @@ class PsrAT73 < AbstractPhp73Extension
   head "https://github.com/jbboehr/php-psr.git"
 
   bottle do
-    sha256 cellar :any_skip_relocation
+    sha256 cellar: :any_skip_relocation
   end
 
   depends_on "pcre"
