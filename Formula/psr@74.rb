@@ -11,7 +11,6 @@ class PsrAT74 < AbstractPhp74Extension
   bottle do
     root_url "https://github.com/phalcon/homebrew-tap/releases/download/v4.0.x"
     sha256 cellar: :any_skip_relocation, sierra: "06249d93567e517f25dabf0e92e0b9b2c04562d2ad1c28b734973d76e94508cb"
-    # sha256 "06249d93567e517f25dabf0e92e0b9b2c04562d2ad1c28b734973d76e94508cb" => :sierra
   end
 
   depends_on "pcre"
@@ -25,6 +24,6 @@ class PsrAT74 < AbstractPhp74Extension
     prefix.install "modules/psr.so"
     prefix.install "modules/psr.la"
 
-    write_config_file if build.with? "config-file"
+    write_config_file
   end
 end
