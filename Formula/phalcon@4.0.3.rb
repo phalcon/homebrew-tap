@@ -9,7 +9,7 @@ class PhalconAT403 < AbstractPhp74Extension
   head "https://github.com/phalcon/cphalcon.git"
 
   bottle do
-    cellar :any_skip_relocation
+    sha256 cellar :any_skip_relocation
     root_url "https://github.com/phalcon/homebrew-tap/releases/download/v4.0.3"
     sha256 "7f1c17ad8fd82b61fae2c7a62fe5c8a1f30676136297a017a6cd9f39fd5c9f25" => :catalina
     # sha256 "49576fba7362f29fb06fa5586bbe92473bd4c7f051eb88ef3d159e68cebb7728" => :mojave

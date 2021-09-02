@@ -9,7 +9,7 @@ class PsrAT74 < AbstractPhp74Extension
   head "https://github.com/jbboehr/php-psr.git"
 
   bottle do
-    cellar :any_skip_relocation
+    sha256 cellar :any_skip_relocation
     root_url "https://github.com/phalcon/homebrew-tap/releases/download/v4.0.x"
     # sha256 "06249d93567e517f25dabf0e92e0b9b2c04562d2ad1c28b734973d76e94508cb" => :sierra
   end

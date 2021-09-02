@@ -9,7 +9,7 @@ class PhalconAT40rc2 < AbstractPhp73Extension
   head "https://github.com/phalcon/cphalcon.git"
 
   bottle do
-    cellar :any_skip_relocation
+    sha256 cellar :any_skip_relocation
   end
 
   depends_on "pcre"
