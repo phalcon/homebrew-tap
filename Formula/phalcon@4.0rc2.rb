@@ -13,7 +13,7 @@ class PhalconAT40rc2 < AbstractPhp73Extension
   end
 
   depends_on "pcre"
-  depends_on "psr@73"
+  depends_on "psr"
 
   def install
     Dir.chdir "build/php7/64bits"
@@ -24,6 +24,7 @@ class PhalconAT40rc2 < AbstractPhp73Extension
     system "make"
 
     prefix.install "modules/phalcon.so"
+
     write_config_file if build.with? "config-file"
   end
 end
