@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        operating-system: [macos-latest]
+        os: [macos-latest]
         phalcon:
           - 3.4
           - 4.0.0
@@ -23,7 +23,7 @@ jobs:
           - 4.0rc3
           - 73_4.0.0
 
-    name: Building Phalcon@${{matrix.phalcon}} Test on ${{ matrix.os }}
+    name: Building Phalcon@${{ matrix.phalcon }} Test on ${{ matrix.os }}
     steps:
 
     - name: Checkout
@@ -33,7 +33,7 @@ jobs:
       run: brew tap phalcon/extension .
 
     - name: Try to Install Phalcon
-      run: brew install phalcon@${{matrix.phalcon}} --build-from-source
+      run: brew install phalcon@${{ matrix.phalcon }} --build-from-source
 
     - name: Force PHP linking for 7.3
       if: startsWith( matrix.phalcon, '4.0.' ) != true && startsWith( matrix.phalcon, '4.1.' ) != true

@@ -19,6 +19,7 @@ jobs:
 
     - name: Testing ini values
       run: |
+        php --ini
         php -r "echo 'xdebug: '.extension_loaded('xdebug');"
         php -v
         php -r "echo 'psr: ' . phpversion('psr').'\n';"
