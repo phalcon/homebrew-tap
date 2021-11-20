@@ -28,23 +28,4 @@ class PsrAT74 < AbstractPhp74Extension
     write_config_file
   end
 
-  def extension
-    "psr"
-  end
-
-  def module_path
-    prefix / "#{extension}.so"
-  end
-
-  def config_file
-    begin
-      <<~EOS
-      [#{extension}]
-      extension="#{module_path}"
-      EOS
-    rescue Exception
-      nil
-    end
-  end
-
 end

@@ -35,6 +35,11 @@ jobs:
     - name: Try to Install Phalcon
       run: brew install phalcon@${{ matrix.phalcon }} --build-from-source
 
+    - name: Check PHP
+      run: |
+        php --ini
+        php -m
+
     - name: Force PHP linking for 7.3
       if: startsWith( matrix.phalcon, '4.0.' ) != true && startsWith( matrix.phalcon, '4.1.' ) != true
       run: brew link -f --overwrite php@7.3

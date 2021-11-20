@@ -11,18 +11,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-        extensions: psr
-        tools: pecl, phpize, php-config
-
     - name: Add Phalcon Tap
       run: brew tap phalcon/extension .
 
     - name: Install Phalcon
-      run: brew install phalcon --build-from-source
+      run: brew install phalcon --build-from-source --verbose
 
     - name: Testing ini values
       run: |
