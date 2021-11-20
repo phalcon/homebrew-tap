@@ -20,6 +20,7 @@ class PsrAT74 < AbstractPhp74Extension
 
     system "./configure", "--prefix=#{prefix}", phpconfig, "--enable-psr"
     system "make"
+    system "make", "install"
 
     prefix.install "modules/psr.so"
     prefix.install "modules/psr.la"

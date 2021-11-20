@@ -26,6 +26,7 @@ class PhalconAT404 < AbstractPhp74Extension
 
     system "./configure", "--prefix=#{prefix}", phpconfig, "--enable-phalcon"
     system "make"
+    system "make", "install"
 
     prefix.install "modules/phalcon.so"
     write_config_file if build.with? "config-file"
