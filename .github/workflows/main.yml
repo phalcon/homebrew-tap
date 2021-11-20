@@ -15,11 +15,11 @@ jobs:
       run: brew tap phalcon/extension .
 
     - name: Install Phalcon
-      run: brew install phalcon --build-from-source --verbose
+      run: brew install phalcon --build-from-source
 
     - name: Testing ini values
       run: |
-        php --ini
+        $(brew --prefix php@7.4)/bin/php --ini
         php -r "echo 'xdebug: '.extension_loaded('xdebug');"
         php -v
         php -r "echo 'psr: ' . phpversion('psr').'\n';"
