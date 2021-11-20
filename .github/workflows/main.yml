@@ -17,12 +17,16 @@ jobs:
     - name: Install Phalcon
       run: brew install phalcon --build-from-source
 
+    - name: Get Brew PHP path
+      id: brew-php-path
+      run: |
+        echo "::set-output name=php-path::$(brew --prefix php@7.4)/bin/php"
+
     - name: Testing ini values
       run: |
-        $(brew --prefix php@7.4)/bin/php --ini
-        php -r "echo 'xdebug: '.extension_loaded('xdebug');"
-        php -v
-        php -r "echo 'psr: ' . phpversion('psr').'\n';"
-        php -r "echo 'phalcon: ' . phpversion('phalcon').'\n';"
-        php -r "if(! extension_loaded('psr')) {throw new Exception('psr not found');}"
-        php -r "if(! extension_loaded('phalcon')) {throw new Exception('phalcon not found');}"
+        ${{ steps.brew-php-path.outputs.php-path }} --ini
+        ${{ steps.brew-php-path.outputs.php-path }} -v
+        ${{ steps.brew-php-path.outputs.php-path }} -r "echo 'psr: ' . phpversion('psr').'\n';"
+        ${{ steps.brew-php-path.outputs.php-path }} -r "echo 'phalcon: ' . phpversion('phalcon').'\n';"
+        ${{ steps.brew-php-path.outputs.php-path }} -r "if(! extension_loaded('psr')) {throw new Exception('psr not found');}"
+        ${{ steps.brew-php-path.outputs.php-path }} -r "if(! extension_loaded('phalcon')) {throw new Exception('phalcon not found');}"
