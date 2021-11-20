@@ -38,8 +38,12 @@ jobs:
         brew install phalcon@${{ matrix.phalcon }} --build-from-source
 
     - name: Force PHP linking
-      if: startsWith( matrix.phalcon, '4.0.' ) != true && startsWith( matrix.phalcon, '4.1.' ) != true
-      run: brew link -f --overwrite php@7.4
+      run: |
+        if [[ "${{ matrix.phalcon }}" =~ ^4\.[0-9] ]]; then
+            brew link -f --overwrite php@7.4
+        else
+            brew link -f --overwrite php@7.3
+        fi
 
     - name: Check PHP
       run: |
