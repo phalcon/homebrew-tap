@@ -23,26 +23,28 @@ jobs:
           - 4.0rc3
           - 73_4.0.0
 
-    name: Building Phalcon@${{ matrix.phalcon }} Test on ${{ matrix.os }}
+    name: Building Phalcon@${{ matrix.phalcon }}
     steps:
 
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
 
     - name: Add Phalcon Tap
       run: brew tap phalcon/extension .
 
-    - name: Try to Install Phalcon
-      run: brew install phalcon@${{ matrix.phalcon }} --build-from-source
+    - name: Install Phalcon with Brew
+      run: |
+        export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"
+        brew install phalcon@${{ matrix.phalcon }} --build-from-source
+
+    - name: Force PHP linking
+      if: startsWith( matrix.phalcon, '4.0.' ) != true && startsWith( matrix.phalcon, '4.1.' ) != true
+      run: brew link -f --overwrite php@7.4
 
     - name: Check PHP
       run: |
         php --ini
         php -m
-
-    - name: Force PHP linking for 7.3
-      if: startsWith( matrix.phalcon, '4.0.' ) != true && startsWith( matrix.phalcon, '4.1.' ) != true
-      run: brew link -f --overwrite php@7.3
 
     - name: Testing ini values 3.4
       if: matrix.phalcon == '3.4'

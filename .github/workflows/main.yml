@@ -15,7 +15,9 @@ jobs:
       run: brew tap phalcon/extension .
 
     - name: Install Phalcon
-      run: brew install phalcon --build-from-source
+      run: |
+        export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"
+        brew install phalcon --build-from-source
 
     - name: Get Brew PHP path
       id: brew-php-path
@@ -26,7 +28,7 @@ jobs:
       run: |
         ${{ steps.brew-php-path.outputs.php-path }} --ini
         ${{ steps.brew-php-path.outputs.php-path }} -v
-        ${{ steps.brew-php-path.outputs.php-path }} -r "echo 'psr: ' . phpversion('psr').'\n';"
-        ${{ steps.brew-php-path.outputs.php-path }} -r "echo 'phalcon: ' . phpversion('phalcon').'\n';"
+        ${{ steps.brew-php-path.outputs.php-path }} --ri psr
+        ${{ steps.brew-php-path.outputs.php-path }} --ri phalcon
         ${{ steps.brew-php-path.outputs.php-path }} -r "if(! extension_loaded('psr')) {throw new Exception('psr not found');}"
         ${{ steps.brew-php-path.outputs.php-path }} -r "if(! extension_loaded('phalcon')) {throw new Exception('phalcon not found');}"
