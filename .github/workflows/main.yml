@@ -12,13 +12,13 @@ jobs:
       matrix:
         os: [macos-11]
         php: ['7.3', '7.4']
-        phalcon: ['3.4', '4.0.0', '4.0.2', '4.0.3', '4.0.4', '4.0.5', '4.0.6', '4.1.0', '4.0RC2', '4.0rc3', '73_4.0.0']
+        # phalcon: ['3.4', '4.0.0', '4.0.2', '4.0.3', '4.0.4', '4.0.5', '4.0.6', '4.1.0', '4.0RC2', '4.0rc3', '73_4.0.0']
 
-        exclude:
+        include:
           - php: '7.3'
-            phalcon: ['4.0.0', '4.0.2', '4.0.3', '4.0.4', '4.0.5', '4.0.6', '4.1.0']
-          - php: '7.4'
             phalcon: ['3.4', '4.0RC2', '4.0rc3', '73_4.0.0']
+          - php: '7.4'
+            phalcon: ['4.0.0', '4.0.2', '4.0.3', '4.0.4', '4.0.5', '4.0.6', '4.1.0']
 
     env:
       HOMEBREW_NO_AUTO_UPDATE: 1
@@ -34,7 +34,7 @@ jobs:
     - name: Install Phalcon
       run: |
         export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"
-        brew install phalcon --build-from-source --build-bottle
+        brew install phalcon --build-from-source
 
     - name: Build Formula
       run: |
