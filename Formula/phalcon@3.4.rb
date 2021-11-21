@@ -20,7 +20,9 @@ class PhalconAT34 < AbstractPhp73Extension
     safe_phpize
     system "./configure", "--prefix=#{prefix}", phpconfig, "--enable-phalcon"
     system "make"
+
     prefix.install "modules/phalcon.so"
+
     write_config_file if build.with? "config-file"
   end
 end

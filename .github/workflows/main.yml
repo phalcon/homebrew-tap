@@ -83,7 +83,5 @@ jobs:
 
     - name: Testing ini values
       run: |
-        php --ri psr
         php --ri phalcon
-        php -r "if(! extension_loaded('psr')) {throw new Exception('psr not found');}"
         php -r "if(! extension_loaded('phalcon')) {throw new Exception('phalcon not found');}"
