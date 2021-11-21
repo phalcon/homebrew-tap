@@ -11,39 +11,15 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-11]
-        include:
-          - phalcon: 3.4
-            php: '7.3'
+        php: ['7.3', '7.4']
+        phalcon: ['3.4', '4.0.0', '4.0.2', '4.0.3', '4.0.4', '4.0.5', '4.0.6', '4.1.0', '4.0RC2', '4.0rc3', '73_4.0.0']
 
-          - phalcon: 4.0.0
-            php: '7.4'
+        exclude:
+          - php: '7.3'
+            phalcon: ['4.0.0', '4.0.2', '4.0.3', '4.0.4', '4.0.5', '4.0.6', '4.1.0']
+          - php: '7.4'
+            phalcon: ['3.4', '4.0RC2', '4.0rc3', '73_4.0.0']
 
-          - phalcon: 4.0.2
-            php: '7.4'
-
-          - phalcon: 4.0.3
-            php: '7.4'
-
-          - phalcon: 4.0.4
-            php: '7.4'
-
-          - phalcon: 4.0.5
-            php: '7.4'
-
-          - phalcon: 4.0.6
-            php: '7.4'
-
-          - phalcon: 4.1.0
-            php: '7.4'
-
-          - phalcon: 4.0RC2
-            php: '7.3'
-
-          - phalcon: 4.0rc3
-            php: '7.3'
-
-          - phalcon: 73_4.0.0
-            php: '7.3'
     env:
       HOMEBREW_NO_AUTO_UPDATE: 1
 
@@ -58,11 +34,10 @@ jobs:
     - name: Install Phalcon
       run: |
         export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"
-        brew install phalcon --build-from-source
+        brew install phalcon --build-from-source --build-bottle
 
     - name: Build Formula
       run: |
-        brew install --build-bottle phalcon
         brew bottle --json --no-rebuild phalcon
 
     - name: Force PHP linking
