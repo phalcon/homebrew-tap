@@ -10,16 +10,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-11 ]
         # phalcon: ['3.4', '4.0.0', '4.0.2', '4.0.3', '4.0.4', '4.0.5', '4.0.6', '4.1.0', '4.0RC2', '4.0rc3', '73_4.0.0']
-
         include:
           - name: phalcon-3.4-php7.3
+            os: macos-11
             php: '7.3'
             phalcon: '3.4'
           - name: phalcon-4.0.0-php7.4
+            os: macos-11
             php: '7.4'
             phalcon: '4.0.0'
+          - name: phalcon-4.0.2-php7.4
+            os: macos-11
+            php: '7.4'
+            phalcon: '4.0.2'
 
     env:
       HOMEBREW_NO_AUTO_UPDATE: 1
