@@ -9,7 +9,8 @@ class PsrAT73 < AbstractPhp73Extension
   head "https://github.com/jbboehr/php-psr.git"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, sierra: "f85be1d1434368abd16e06b81e394487f81b5e2706220f01c85558ba486ee3e7"
+    root_url "https://github.com/phalcon/homebrew-tap/releases/download/v4.0.x"
+    sha256 cellar: :any_skip_relocation, big_sur: "78320e74907e968796963d796cffc158ff6f4b124d57b3e173c68c39e941e85e"
   end
 
   depends_on "pcre"
