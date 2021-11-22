@@ -5,20 +5,83 @@ on: [push]
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
 
+    strategy:
+      fail-fast: false
+      matrix:
+        # phalcon: ['3.4', '4.0.0', '4.0.2', '4.0.3', '4.0.4', '4.0.5', '4.0.6', '4.1.0', '4.0RC2', '4.0rc3', '73_4.0.0']
+        include:
+          - name: phalcon-3.4-php7.3
+            os: macos-11
+            php: '7.3'
+            phalcon: '3.4'
+          - name: phalcon-4.0.0-php7.4
+            os: macos-11
+            php: '7.4'
+            phalcon: '4.0.0'
+          - name: phalcon-4.0.2-php7.4
+            os: macos-11
+            php: '7.4'
+            phalcon: '4.0.2'
+          - name: phalcon-4.0.3-php7.4
+            os: macos-11
+            php: '7.4'
+            phalcon: '4.0.3'
+          - name: phalcon-4.0.4-php7.4
+            os: macos-11
+            php: '7.4'
+            phalcon: '4.0.4'
+          - name: phalcon-4.0.5-php7.4
+            os: macos-11
+            php: '7.4'
+            phalcon: '4.0.5'
+          - name: phalcon-4.0.6-php7.4
+            os: macos-11
+            php: '7.4'
+            phalcon: '4.0.6'
+          - name: phalcon-4.1.0-php7.4
+            os: macos-11
+            php: '7.4'
+            phalcon: '4.1.0'
+          - name: phalcon-4.0RC2-php7.3
+            os: macos-11
+            php: '7.3'
+            phalcon: '4.0RC2'
+          - name: phalcon-4.0rc3-php7.3
+            os: macos-11
+            php: '7.3'
+            phalcon: '4.0rc3'
+          - name: phalcon-73_4.0.0-php7.3
+            os: macos-11
+            php: '7.3'
+            phalcon: '73_4.0.0'
+
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+
+    name: Building Phalcon@${{ matrix.phalcon }} PHP-${{ matrix.php }}
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
+
     - name: Add Phalcon Tap
       run: brew tap phalcon/extension .
-    - name: Try to Install Phalcon
-      run: brew install phalcon --build-from-source
+
+    - name: Install Phalcon
+      run: |
+        export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"
+        brew install phalcon@${{ matrix.phalcon }} --build-from-source
+
+    - name: Force PHP linking
+      run: brew link -f --overwrite php@${{ matrix.php }}
+
+    - name: Check PHP
+      run: |
+        php -v
+        php --ini
+
     - name: Testing ini values
-      run: |        
-        php -r "echo 'xdebug: '.extension_loaded('xdebug');"
-        php -v            
-        php -r "echo 'psr: ' . phpversion('psr').'\n';"
-        php -r "echo 'phalcon: ' . phpversion('phalcon').'\n';"        
-        php -r "if(! extension_loaded('psr')) {throw new Exception('psr not found');}"
+      run: |
+        php --ri phalcon
         php -r "if(! extension_loaded('phalcon')) {throw new Exception('phalcon not found');}"

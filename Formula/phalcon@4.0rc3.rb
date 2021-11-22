@@ -1,4 +1,4 @@
-require File.expand_path("../../Abstract/abstract-php-extension", __FILE__)
+require File.expand_path("../Abstract/abstract-php-extension", __dir__)
 
 class PhalconAT40rc3 < AbstractPhp73Extension
   init
@@ -9,11 +9,11 @@ class PhalconAT40rc3 < AbstractPhp73Extension
   head "https://github.com/phalcon/cphalcon.git"
 
   bottle do
-    cellar :any_skip_relocation
+    sha256 cellar: :any_skip_relocation, catalina: "d7bd18aa687530f8df89270e13892fac94d2414524f0104f84b9565bdc58d8f6"
   end
 
   depends_on "pcre"
-  depends_on "psr@73"
+  depends_on "psr@7.3"
 
   def install
     Dir.chdir "build/php7/64bits"
@@ -24,6 +24,7 @@ class PhalconAT40rc3 < AbstractPhp73Extension
     system "make"
 
     prefix.install "modules/phalcon.so"
+
     write_config_file if build.with? "config-file"
   end
 end
